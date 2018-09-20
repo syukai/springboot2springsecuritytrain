@@ -6,4 +6,5 @@ logging.level:
   jdbc: OFF
   jdbc.sqltiming: DEBUG
   org.springframework.security.web: DEBUG
+  org.springframework.security.authentication: DEBUG
 spring.jpa.hibernate.ddl-auto: validate

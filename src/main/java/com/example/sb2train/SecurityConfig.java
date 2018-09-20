@@ -26,8 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.usernameParameter("username")
 					.passwordParameter("password")
 				.loginProcessingUrl("/login")
-				.successForwardUrl("/success")
-				.failureUrl("/failure");
+				.defaultSuccessUrl("/success")
+				.failureUrl("/failure")
+			.and().csrf().disable();
 		
 	}
 	
@@ -38,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		AuthenticationConfiguration(
 				UserDetailsService userDetailsService){
+			
+			System.out.println("Authentication Config userDetailsService");
 			this.userDetailsService = userDetailsService;
 		}
 		
@@ -45,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		public void init(AuthenticationManagerBuilder auth) throws Exception {
 			auth.userDetailsService(userDetailsService)
 				.passwordEncoder(new BCryptPasswordEncoder());
+			System.out.println("userDetailsService BCryptEncoder");
 		}
 	}
 	

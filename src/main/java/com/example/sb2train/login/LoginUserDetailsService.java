@@ -5,21 +5,28 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LoginUserDetailsService implements UserDetailsService {
 
 	private final UserRepository repository;
 	
 	LoginUserDetailsService(
 			UserRepository repository){
+		
+		System.out.println("LoginUserDetailsService construct");
+		
 		this.repository = repository;
 	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("username:" + username);
 		Optional<Account> a = repository.findByUsername(username);
 		
 		if(a.isPresent()) {
+			System.out.println("user found");
 			return new LoginUserDetails(a.get().myName, a.get().myPass);
 		}else {
 			return null;
