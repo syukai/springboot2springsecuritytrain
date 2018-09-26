@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -27,13 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.passwordParameter("password")
 				.loginProcessingUrl("/login")
 				.defaultSuccessUrl("/success")
-				.failureUrl("/failure")
-			.and().csrf().disable();
+				.failureUrl("/failure");
+//			.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		
 	}
 	
 	
 	@Configuration
+//	static class AuthenticationConfiguration extends org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter{
 	static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter{
 		UserDetailsService userDetailsService;
 		

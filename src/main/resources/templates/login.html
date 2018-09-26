@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
 <body>
 <form method="POST" action="/login">
 <div>
@@ -9,6 +14,7 @@
 	<label>password</label><input type="password" name="password" />
 </div>
 <input type="submit" value="login" />
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 </form>
 </body>
 </html>

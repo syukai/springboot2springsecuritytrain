@@ -14,19 +14,14 @@ public class LoginUserDetailsService implements UserDetailsService {
 	
 	LoginUserDetailsService(
 			UserRepository repository){
-		
-		System.out.println("LoginUserDetailsService construct");
-		
 		this.repository = repository;
 	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("username:" + username);
 		Optional<Account> a = repository.findByUsername(username);
 		
 		if(a.isPresent()) {
-			System.out.println("user found");
 			return new LoginUserDetails(a.get().myName, a.get().myPass);
 		}else {
 			return null;
